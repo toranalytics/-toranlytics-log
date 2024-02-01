@@ -2,8 +2,5 @@
 User-agent: *
 Allow: /
 
-# Host
-Host: https://uiw6unoh-log.vercel.app
-
 # Sitemaps
 Sitemap: https://uiw6unoh-log.vercel.app/sitemap.xml
