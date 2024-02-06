@@ -53,7 +53,7 @@ const Sparkle = (): JSX.Element => {
           },
         ])
       }
-    }, 300)
+    }, 100)
 
     document.addEventListener("mousemove", moveHandler)
     return () => document.removeEventListener("mousemove", moveHandler)
