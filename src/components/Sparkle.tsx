@@ -49,7 +49,7 @@ const Sparkle = (): JSX.Element => {
             top: e.pageY,
             color: newColour(),
             visible: true,
-            size: 7,
+            size: 5,
           },
         ])
       }
