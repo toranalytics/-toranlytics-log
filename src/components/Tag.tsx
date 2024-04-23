@@ -1,5 +1,18 @@
+import { colors } from "../styles/colors"
+import styled from "@emotion/styled"
 import { useRouter } from "next/router"
 import React from "react"
+
+// 색상 배열 생성
+const colorArray = [
+  colors.light.red4,
+  colors.light.amber4,
+  colors.light.green4,
+  colors.light.blue4,
+  colors.light.indigo4,
+  colors.light.purple4,
+  colors.light.pink4,
+]
 
 type Props = {
   children: string
@@ -8,30 +21,24 @@ type Props = {
 
 const Tag: React.FC<Props> = ({ children, tag_id }) => {
   const router = useRouter()
+
   const handleClick = (value: string) => {
     router.push(`/?tag=${value}`)
   }
 
-  let arrayOfColors = [
-    "bg-red-200",
-    "bg-yellow-200",
-    "bg-green-200",
-    "bg-blue-200",
-    "bg-indigo-200",
-    "bg-purple-200",
-    "bg-pink-200",
-  ]
+  // 스타일드 컴포넌트 정의
+  const StyledTag = styled.div`
+    background-color: ${colorArray[tag_id % colorArray.length]};
+    color: ${colors.light.gray10};
+    padding: 0.25rem 0.5rem;
+    border-radius: 50px;
+    font-size: 0.75rem;
+    line-height: 1rem;
+    font-weight: 400;
+    cursor: pointer;
+  `
 
-  return (
-    <div
-      onClick={() => handleClick(children)}
-      className={`text-xs text-gray-800 font-normal rounded-full ${
-        arrayOfColors[tag_id % arrayOfColors.length]
-      } px-2 py-1 cursor-pointer`}
-    >
-      {children}
-    </div>
-  )
+  return <StyledTag onClick={() => handleClick(children)}>{children}</StyledTag>
 }
 
 export default Tag

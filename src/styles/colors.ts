@@ -13,7 +13,11 @@ import {
   amberDark,
   grayA,
   grayDarkA,
+  pink,
+  purpleDark,
+  pinkDark,
 } from "@radix-ui/colors"
+import { purple } from "@radix-ui/colors/types/dark/purple"
 
 export type Colors = typeof colors.light & typeof colors.dark
 
@@ -26,6 +30,8 @@ export const colors = {
     ...green,
     ...amber,
     ...grayA,
+    ...purple,
+    ...pink,
   },
   dark: {
     ...indigoDark,
@@ -35,5 +41,7 @@ export const colors = {
     ...greenDark,
     ...amberDark,
     ...grayDarkA,
+    ...purpleDark,
+    ...pinkDark,
   },
 }
