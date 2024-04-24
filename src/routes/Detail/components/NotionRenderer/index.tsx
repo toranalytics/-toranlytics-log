@@ -8,7 +8,8 @@ import useScheme, { Scheme } from "src/hooks/useScheme"
 import "react-notion-x/src/styles.css"
 
 // used for code syntax highlighting (optional)
-import "prismjs/themes/prism-okaidia.css"
+import "prismjs/themes/prism.css"
+// import "prismjs/themes/prism-coy.css";
 
 // used for rendering equations (optional)
 
