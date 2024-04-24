@@ -60,7 +60,7 @@ type Props = {
 const NotionRenderer: FC<Props> = ({ recordMap }) => {
   const [scheme] = useScheme()
   return (
-    <StyledWrapper>
+    <StyledWrapper theme={scheme}>
       <_NotionRenderer
         darkMode={scheme === "dark"}
         recordMap={recordMap}
@@ -88,5 +88,8 @@ const StyledWrapper = styled.div`
   }
   .notion-page {
     padding: 0;
+  }
+  .notion-code {
+    background-color: ${({ theme }) => (theme === "dark" ? "#333" : "#ccc")};
   }
 `
