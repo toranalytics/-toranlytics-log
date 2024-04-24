@@ -8,7 +8,7 @@ import useScheme, { Scheme } from "src/hooks/useScheme"
 import "react-notion-x/src/styles.css"
 
 // used for code syntax highlighting (optional)
-import "prismjs/themes/prism-tomorrow.css"
+import "prismjs/themes/prism-okaidia.css"
 
 // used for rendering equations (optional)
 
@@ -23,7 +23,12 @@ const _NotionRenderer = dynamic(
 
 const Code = dynamic(() =>
   import("react-notion-x/build/third-party/code").then(async (m) => {
-    await Promise.all([import("prismjs/components/prism-java.js")])
+    await Promise.all([
+      import("prismjs/components/prism-java.js"),
+      import("prismjs/components/prism-sql.js"),
+      import("prismjs/components/prism-python.js"),
+      import("prismjs/components/prism-typescript.js"),
+    ])
     return m.Code as any
   })
 )
