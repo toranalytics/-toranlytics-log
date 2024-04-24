@@ -2,7 +2,7 @@ import dynamic from "next/dynamic"
 import Image from "next/image"
 import Link from "next/link"
 import { ExtendedRecordMap } from "notion-types"
-import useScheme from "src/hooks/useScheme"
+import useScheme, { Scheme } from "src/hooks/useScheme"
 
 // core styles shared by all of react-notion-x (required)
 import "react-notion-x/src/styles.css"
@@ -81,7 +81,11 @@ const NotionRenderer: FC<Props> = ({ recordMap }) => {
 
 export default NotionRenderer
 
-const StyledWrapper = styled.div`
+type StyledWrapperProps = {
+  theme: Scheme
+}
+
+const StyledWrapper = styled.div<StyledWrapperProps>`
   /* // TODO: why render? */
   .notion-collection-page-properties {
     display: none !important;
@@ -90,6 +94,7 @@ const StyledWrapper = styled.div`
     padding: 0;
   }
   .notion-code {
-    background-color: ${({ theme }) => (theme === "dark" ? "#333" : "#ccc")};
+    background-color: ${({ theme }) =>
+      theme === "dark" ? "#2d2d2d" : "#f7f6f3"};
   }
 `
