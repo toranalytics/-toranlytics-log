@@ -57,10 +57,14 @@ type Props = {
   recordMap: ExtendedRecordMap
 }
 
+type StyledWrapperProps = {
+  theme: Scheme
+}
+
 const NotionRenderer: FC<Props> = ({ recordMap }) => {
   const [scheme] = useScheme()
   return (
-    <StyledWrapper theme={scheme}>
+    <StyledWrapper theme={scheme as any}>
       <_NotionRenderer
         darkMode={scheme === "dark"}
         recordMap={recordMap}
@@ -80,10 +84,6 @@ const NotionRenderer: FC<Props> = ({ recordMap }) => {
 }
 
 export default NotionRenderer
-
-type StyledWrapperProps = {
-  theme: Scheme
-}
 
 const StyledWrapper = styled.div<StyledWrapperProps>`
   /* // TODO: why render? */
