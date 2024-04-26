@@ -1,8 +1,8 @@
 import { CONFIG } from "site.config"
+import { Emoji } from "src/components/Emoji"
 import Image from "next/image"
 import React from "react"
 import styled from "@emotion/styled"
-import { Emoji } from "src/components/Emoji"
 
 type Props = {}
 
