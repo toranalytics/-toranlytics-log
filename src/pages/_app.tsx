@@ -4,6 +4,8 @@ import Sparkle from "src/components/Sparkle"
 import { RootLayout } from "src/layouts"
 import { queryClient } from "src/libs/react-query"
 
+import "/src/styles/themes/prism.css"
+
 function App({ Component, pageProps }: AppPropsWithLayout) {
   const getLayout = Component.getLayout || ((page) => page)
 
