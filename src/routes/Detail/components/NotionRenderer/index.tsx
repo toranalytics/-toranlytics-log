@@ -162,7 +162,7 @@ const StyledWrapper = styled.div<StyledWrapperProps>`
   }
 
   .notion-code > code {
-    color: rgb(17 24 39);
+    color: ${({ theme }) => (theme === "dark" ? "#ccc)" : "rgb(17 24 39);")};
   }
 
   pre[class*="language-"] {
