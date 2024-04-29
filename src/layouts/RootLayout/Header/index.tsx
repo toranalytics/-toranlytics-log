@@ -66,7 +66,7 @@ const HeaderWrapper = styled.div`
 const ReadingProgress = styled.div<Props>`
   width: ${({ readingProgress }) => readingProgress + "%"};
   height: 0.2rem;
-  background-color: ${({ theme }) => theme.colors.amber11};
+  background-color: ${({ theme }) => theme.colors.sky11};
   opacity: 0.6;
   transition: width 0.4s ease-out;
 `
