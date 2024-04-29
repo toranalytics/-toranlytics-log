@@ -7,14 +7,10 @@ import useScheme, { Scheme } from "src/hooks/useScheme"
 // core styles shared by all of react-notion-x (required)
 import "react-notion-x/src/styles.css"
 
-// used for code syntax highlighting (optional)
-import "prismjs/themes/prism.css"
-// import "prismjs/themes/prism-coy.css";
-
 // used for rendering equations (optional)
 
 import "katex/dist/katex.min.css"
-import { FC } from "react"
+import { FC, useEffect } from "react"
 import styled from "@emotion/styled"
 import { pretendard } from "src/assets"
 
@@ -70,6 +66,14 @@ type StyledWrapperProps = {
 
 const NotionRenderer: FC<Props> = ({ recordMap }) => {
   const [scheme] = useScheme()
+
+  useEffect(() => {
+    const rootElement = document.documentElement
+    if (rootElement) {
+      rootElement.setAttribute("data-theme", scheme)
+    }
+  }, [scheme])
+
   return (
     <StyledWrapper theme={scheme as any}>
       <_NotionRenderer
@@ -93,7 +97,6 @@ const NotionRenderer: FC<Props> = ({ recordMap }) => {
 export default NotionRenderer
 
 const StyledWrapper = styled.div<StyledWrapperProps>`
-  /* // TODO: why render? */
   .notion-collection-page-properties {
     display: none !important;
   }
@@ -159,7 +162,7 @@ const StyledWrapper = styled.div<StyledWrapperProps>`
   }
 
   .notion-code > code {
-    color: rgb(17 24 39);
+    color: ${({ theme }) => (theme === "dark" ? "#ccc)" : "rgb(17 24 39);")};
   }
 
   pre[class*="language-"] {
