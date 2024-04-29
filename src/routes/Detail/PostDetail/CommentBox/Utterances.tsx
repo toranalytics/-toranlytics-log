@@ -37,7 +37,7 @@ const Utterances: React.FC<Props> = ({ issueTerm }) => {
   return (
     <>
       <StyledWrapper id="comments">
-        <div className="utterances-frame"></div>
+        {/* <div className="utterances-frame"></div> */}
       </StyledWrapper>
     </>
   )
