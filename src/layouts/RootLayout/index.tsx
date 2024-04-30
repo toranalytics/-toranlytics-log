@@ -27,27 +27,35 @@ const RootLayout = ({ children }: Props) => {
   }, 100)
 
   const getCurrentPercentage = () => {
-    if (router.asPath === "/") return 0
+    if (window.scrollY === 0 || router.asPath === "/") return 0
 
-    let percentage = Math.ceil((throttleScrollY / blogHeight) * 100)
+    if (!currentElementRef.current) return 0
 
-    if (percentage >= 90) {
-      percentage = 100
-    } else {
-      percentage = Math.ceil((throttleScrollY / blogHeight) * 100)
-    }
-    return percentage
+    const scrollPosition = window.scrollY + window.innerHeight
+    const totalHeight = document.documentElement.scrollHeight
+    let percentage = (scrollPosition / totalHeight) * 100
+    percentage = Math.min(100, Math.max(0, percentage))
+
+    percentage = percentage >= 90 ? 100 : percentage
+    return Math.ceil(percentage)
   }
 
   useEffect(() => {
-    if (currentElementRef.current) {
-      const clientHeight = currentElementRef.current.clientHeight
-      setBlogHeight(clientHeight)
+    const updateBlogHeight = () => {
+      const totalHeight = document.documentElement.scrollHeight
+      setBlogHeight(window.scrollY === 0 ? 0 : totalHeight - window.innerHeight)
     }
 
+    window.addEventListener("resize", updateBlogHeight)
     window.addEventListener("scroll", scrollThrottle)
-    return () => window.removeEventListener("scroll", scrollThrottle)
-  }, [throttleScrollY])
+
+    updateBlogHeight()
+
+    return () => {
+      window.removeEventListener("scroll", scrollThrottle)
+      window.removeEventListener("resize", updateBlogHeight)
+    }
+  }, [scrollThrottle])
 
   return (
     <ThemeProvider scheme={scheme}>
