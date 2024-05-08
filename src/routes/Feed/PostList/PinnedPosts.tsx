@@ -1,7 +1,9 @@
 import PostCard from "src/routes/Feed/PostList/PostCard"
-import React, { useEffect, useState } from "react"
+import React, { useMemo } from "react"
 import usePostsQuery from "src/hooks/usePostsQuery"
 import styled from "@emotion/styled"
+import { filterPosts } from "./filterPosts"
+import { DEFAULT_CATEGORY } from "src/constants"
 
 type Props = {
   q: string
@@ -10,25 +12,15 @@ type Props = {
 const PinnedPosts: React.FC<Props> = ({ q }) => {
   const data = usePostsQuery()
 
-  const [filteredPosts, setFilteredPosts] = useState(data)
-
-  useEffect(() => {
-    setFilteredPosts(() => {
-      let filteredPosts = data
-      // keyword
-      filteredPosts = filteredPosts.filter((post) => {
-        const tagContent = post.tags ? post.tags.join(" ") : ""
-        const searchContent = post.title + post.summary + tagContent
-        return searchContent.toLowerCase().includes(q.toLowerCase())
-      })
-
-      filteredPosts = filteredPosts.filter(
-        (post) => post && post.tags && post.tags.includes("Pinned")
-      )
-
-      return filteredPosts
+  const filteredPosts = useMemo(() => {
+    const baseFiltered = filterPosts({
+      posts: data,
+      q,
+      category: DEFAULT_CATEGORY,
+      order: "desc",
     })
-  }, [q])
+    return baseFiltered.filter((post) => post.tags?.includes("Pinned"))
+  }, [data, q])
 
   if (filteredPosts.length === 0) return null
 
