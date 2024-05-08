@@ -9,20 +9,21 @@ import styled from "@emotion/styled"
 
 type Props = {
   data: TPost
+  showMedia: boolean
 }
 
-const PostCard: React.FC<Props> = ({ data }) => {
+const PostCard: React.FC<Props> = ({ data, showMedia }) => {
   const category = (data.category && data.category?.[0]) || undefined
 
   return (
     <StyledWrapper href={`/${data.slug}`}>
       <article>
-        {category && (
+        {showMedia && category && (
           <div className="category">
             <Category>{category}</Category>
           </div>
         )}
-        {data.thumbnail && (
+        {showMedia && data.thumbnail && (
           <div className="thumbnail">
             <Image
               src={data.thumbnail}
