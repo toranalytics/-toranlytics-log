@@ -22,10 +22,14 @@ const _NotionRenderer = dynamic(
 const Code = dynamic(() =>
   import("react-notion-x/build/third-party/code").then(async (m) => {
     await Promise.all([
+      import("prismjs/components/prism-bash.js"),
+      import("prismjs/components/prism-docker.js"),
+      import("prismjs/components/prism-yaml.js"),
       import("prismjs/components/prism-java.js"),
       import("prismjs/components/prism-sql.js"),
       import("prismjs/components/prism-python.js"),
       import("prismjs/components/prism-typescript.js"),
+      import("prismjs/components/prism-javascript.js"),
     ])
     return m.Code as any
   })
@@ -102,6 +106,9 @@ const StyledWrapper = styled.div<StyledWrapperProps>`
   }
   .notion-page {
     padding: 0;
+  }
+  .notion-list {
+    width: 100%;
   }
   .notion-code {
     background-color: ${({ theme }) =>
