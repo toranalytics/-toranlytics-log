@@ -3,7 +3,7 @@ User-agent: *
 Allow: /
 
 # Host
-Host: https://uiw6unoh-log.vercel.app
+Host: https://toranalytics.vercel.app
 
 # Sitemaps
-Sitemap: https://uiw6unoh-log.vercel.app/sitemap.xml
+Sitemap: https://toranalytics.vercel.app/sitemap.xml
