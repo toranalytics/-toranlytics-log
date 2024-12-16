@@ -1,19 +1,23 @@
-import useDropdown from "src/hooks/useDropdown"
-import { useRouter } from "next/router"
-import React from "react"
-import { MdExpandMore } from "react-icons/md"
-import { DEFAULT_CATEGORY } from "src/constants"
+// CategorySelect.tsx
+import React, { useRef, useState } from "react"
 import styled from "@emotion/styled"
-import { useCategoriesQuery } from "src/hooks/useCategoriesQuery"
+import { useRouter } from "next/router"
+import { DEFAULT_CATEGORY } from "src/constants"
 
-type Props = {}
+type Props = {
+  data: Record<string, number>
+}
 
-const CategorySelect: React.FC<Props> = () => {
+const CategorySelect: React.FC<Props> = ({ data }) => {
   const router = useRouter()
-  const data = useCategoriesQuery()
-  const [dropdownRef, opened, handleOpen] = useDropdown()
-
+  const [opened, setOpened] = useState(false)
+  const dropdownRef = useRef<HTMLDivElement>(null)
+  
   const currentCategory = `${router.query.category || ``}` || DEFAULT_CATEGORY
+
+  const handleOpen = () => {
+    setOpened(!opened)
+  }
 
   const handleOptionClick = (category: string) => {
     router.push({
@@ -22,25 +26,30 @@ const CategorySelect: React.FC<Props> = () => {
         category,
       },
     })
+    setOpened(false)
   }
+
   return (
     <StyledWrapper>
       <div ref={dropdownRef} className="wrapper" onClick={handleOpen}>
-        {currentCategory} Posts <MdExpandMore />
-      </div>
-      {opened && (
-        <div className="content">
-          {Object.keys(data).map((key, idx) => (
-            <div
-              className="item"
-              key={idx}
-              onClick={() => handleOptionClick(key)}
-            >
-              {`${key} (${data[key]})`}
-            </div>
-          ))}
+        <div className="current">
+          {`${currentCategory} (${data[currentCategory] || 0})`}
         </div>
-      )}
+        
+        {opened && (
+          <div className="content">
+            {Object.keys(data).map((key, idx) => (
+              <div
+                className="item"
+                key={idx}
+                onClick={() => handleOptionClick(key)}
+              >
+                {`${key} (${data[key]})`}
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
     </StyledWrapper>
   )
 }
@@ -48,39 +57,33 @@ const CategorySelect: React.FC<Props> = () => {
 export default CategorySelect
 
 const StyledWrapper = styled.div`
-  position: relative;
-  > .wrapper {
-    display: flex;
-    margin-top: 0.5rem;
-    margin-bottom: 0.5rem;
-    gap: 0.25rem;
-    align-items: center;
-    font-size: 1.25rem;
-    line-height: 1.75rem;
-    font-weight: 700;
+  .wrapper {
+    position: relative;
     cursor: pointer;
   }
-  > .content {
-    position: absolute;
-    z-index: 40;
-    padding: 0.25rem;
-    border-radius: 0.75rem;
-    background-color: ${({ theme }) => theme.colors.gray2};
-    color: ${({ theme }) => theme.colors.gray10};
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
-      0 2px 4px -1px rgba(0, 0, 0, 0.06);
-    > .item {
-      padding: 0.25rem;
-      padding-left: 0.5rem;
-      padding-right: 0.5rem;
-      border-radius: 0.75rem;
-      font-size: 0.875rem;
-      line-height: 1.25rem;
-      white-space: nowrap;
-      cursor: pointer;
 
-      :hover {
-        background-color: ${({ theme }) => theme.colors.gray4};
+  .current {
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    background-color: ${(props) => props.theme.colors.gray};
+  }
+
+  .content {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    margin-top: 0.5rem;
+    background-color: ${(props) => props.theme.colors.white};
+    border-radius: 0.5rem;
+    box-shadow: ${(props) => props.theme.shadows.md};
+    z-index: 10;
+
+    .item {
+      padding: 0.5rem 1rem;
+      
+      &:hover {
+        background-color: ${(props) => props.theme.colors.gray};
       }
     }
   }
