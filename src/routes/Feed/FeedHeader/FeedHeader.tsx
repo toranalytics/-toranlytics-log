@@ -1,25 +1,24 @@
+// FeedHeader.tsx
 import React from "react"
-import CategorySelect from "./CategorySelect"
-import OrderButtons from "./OrderButtons"
-import styled from "@emotion/styled"
+import { CategorySelect } from "./CategorySelect"
+import { OrderButtons } from "./OrderButtons"
+import { StyledWrapper } from "./styles"
 
-type Props = {}
+const FeedHeader: React.FC = () => {
+  // Add categories data
+  const categoriesData: Record<string, number> = {
+    // Add your category data here
+    // Example:
+    // "category1": 10,
+    // "category2": 20,
+  }
 
-const FeedHeader: React.FC<Props> = () => {
   return (
     <StyledWrapper>
-      <CategorySelect />
+      <CategorySelect data={categoriesData} />
       <OrderButtons />
     </StyledWrapper>
   )
 }
 
 export default FeedHeader
-
-const StyledWrapper = styled.div`
-  display: flex;
-  margin-bottom: 1rem;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 1px solid ${({ theme }) => theme.colors.gray6};
-`
