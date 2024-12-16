@@ -19,6 +19,7 @@ const CategorySelect: React.FC<Props> = ({ data }) => {
     setOpened(!opened)
   }
 
+  
   const handleOptionClick = (category: string) => {
     router.push({
       query: {
