@@ -4,13 +4,12 @@ import { CategorySelect } from "./CategorySelect"
 import { OrderButtons } from "./OrderButtons"
 import { StyledWrapper } from "./styles"
 
+
 const FeedHeader: React.FC = () => {
   // Add categories data
   const categoriesData: Record<string, number> = {
-    // Add your category data here
-    // Example:
-    // "category1": 10,
-    // "category2": 20,
+    "category1": 10,
+    "category2": 20,
   }
 
   return (
@@ -20,5 +19,6 @@ const FeedHeader: React.FC = () => {
     </StyledWrapper>
   )
 }
+
 
 export default FeedHeader
