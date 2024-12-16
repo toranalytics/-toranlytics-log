@@ -57,11 +57,24 @@ const CategorySelect: React.FC<Props> = ({ data }) => {
 export default CategorySelect
 
 const StyledWrapper = styled.div`
-  .wrapper {
-    position: relative;
-    cursor: pointer;
+  .feed-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
   }
 
+  .sidebar {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    flex-shrink: 0;
+  }
+
+  // 해시태그를 하단에 배치하기 위한 코드 추가
+  .profile-tags {
+    order: 2; // 태그를 하단으로 밀어냅니다.
+    margin-top: auto; // 공간이 있다면 아래로 밀어냅니다.
+  }
   .current {
     padding: 0.5rem 1rem;
     border-radius: 0.5rem;
