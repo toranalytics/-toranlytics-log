@@ -76,7 +76,7 @@ const StyledWrapper = styled.div`
     margin-top: 0.5rem;
     background-color: ${(props) => props.theme.colors.gray1};  // Changed from gray to gray1
     border-radius: 0.5rem;
-    box-shadow: ${(props) => props.theme.shadows.md};
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     z-index: 10;
 
     .item {
