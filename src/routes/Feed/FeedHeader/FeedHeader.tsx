@@ -1,20 +1,25 @@
 import React from "react"
-import { CategorySelect } from "./CategorySelect"
-import { OrderButtons } from "./OrderButtons"
-import { StyledWrapper } from "./styles"
+import CategorySelect from "./CategorySelect"
+import OrderButtons from "./OrderButtons"
+import styled from "@emotion/styled"
 
-const FeedHeader: React.FC = () => {
-  const categoriesData: Record<string, number> = {
-    "All": 0,
-    // Add more categories as needed
-  }
+type Props = {}
 
+const FeedHeader: React.FC<Props> = () => {
   return (
     <StyledWrapper>
-      <CategorySelect data={categoriesData} />
+      <CategorySelect />
       <OrderButtons />
     </StyledWrapper>
   )
 }
 
 export default FeedHeader
+
+const StyledWrapper = styled.div`
+  display: flex;
+  margin-bottom: 1rem;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid ${({ theme }) => theme.colors.gray6};
+`

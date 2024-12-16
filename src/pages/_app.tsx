@@ -17,7 +17,6 @@ function App({ Component, pageProps }: AppPropsWithLayout) {
       {/* <AnimatedCursor /> */}
       <Sparkle />
     </QueryClientProvider>
-
   )
 }
 

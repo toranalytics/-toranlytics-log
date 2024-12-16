@@ -7,7 +7,6 @@ const Scripts: React.FC = () => (
       <>
         <Script
           src={`https://www.googletagmanager.com/gtag/js?id=${CONFIG.googleAnalytics.config.measurementId}`}
-          
         />
         <Script strategy="lazyOnload" id="ga">
           {`window.dataLayer = window.dataLayer || [];

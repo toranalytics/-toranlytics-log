@@ -1,25 +1,20 @@
-// src/routes/Feed/FeedHeader/CategorySelect.tsx
-import React, { useRef, useState } from "react"
-import styled from "@emotion/styled"
+import useDropdown from "src/hooks/useDropdown"
 import { useRouter } from "next/router"
+import React from "react"
+import { MdExpandMore } from "react-icons/md"
 import { DEFAULT_CATEGORY } from "src/constants"
+import styled from "@emotion/styled"
+import { useCategoriesQuery } from "src/hooks/useCategoriesQuery"
 
-type Props = {
-  data: Record<string, number>
-}
+type Props = {}
 
-const CategorySelect: React.FC<Props> = ({ data }) => {
+const CategorySelect: React.FC<Props> = () => {
   const router = useRouter()
-  const [opened, setOpened] = useState(false)
-  const dropdownRef = useRef<HTMLDivElement>(null)
-  
+  const data = useCategoriesQuery()
+  const [dropdownRef, opened, handleOpen] = useDropdown()
+
   const currentCategory = `${router.query.category || ``}` || DEFAULT_CATEGORY
 
-  const handleOpen = () => {
-    setOpened(!opened)
-  }
-
-  
   const handleOptionClick = (category: string) => {
     router.push({
       query: {
@@ -27,30 +22,25 @@ const CategorySelect: React.FC<Props> = ({ data }) => {
         category,
       },
     })
-    setOpened(false)
   }
-
   return (
     <StyledWrapper>
       <div ref={dropdownRef} className="wrapper" onClick={handleOpen}>
-        <div className="current">
-          {`${currentCategory} (${data[currentCategory] || 0})`}
-        </div>
-        
-        {opened && (
-          <div className="content">
-            {Object.keys(data).map((key, idx) => (
-              <div
-                className="item"
-                key={idx}
-                onClick={() => handleOptionClick(key)}
-              >
-                {`${key} (${data[key]})`}
-              </div>
-            ))}
-          </div>
-        )}
+        {currentCategory} Posts <MdExpandMore />
       </div>
+      {opened && (
+        <div className="content">
+          {Object.keys(data).map((key, idx) => (
+            <div
+              className="item"
+              key={idx}
+              onClick={() => handleOptionClick(key)}
+            >
+              {`${key} (${data[key]})`}
+            </div>
+          ))}
+        </div>
+      )}
     </StyledWrapper>
   )
 }
@@ -58,45 +48,39 @@ const CategorySelect: React.FC<Props> = ({ data }) => {
 export default CategorySelect
 
 const StyledWrapper = styled.div`
-  .feed-container {
+  position: relative;
+  > .wrapper {
     display: flex;
-    flex-direction: column;
-    gap: 2rem;
-  }
-
-  .sidebar {
-    display: flex;
-    flex-direction: column;
-    width: 300px;
-    flex-shrink: 0;
-  }
-
-  // 해시태그를 하단에 배치하기 위한 코드 추가
-  .profile-tags {
-    order: 2; // 태그를 하단으로 밀어냅니다.
-    margin-top: auto; // 공간이 있다면 아래로 밀어냅니다.
-  }
-  .current {
-    padding: 0.5rem 1rem;
-    border-radius: 0.5rem;
-    background-color: ${(props) => props.theme.colors.gray1};  // Changed from gray to gray1
-  }
-
-  .content {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 100%;
     margin-top: 0.5rem;
-    background-color: ${(props) => props.theme.colors.gray1};  // Changed from gray to gray1
-    border-radius: 0.5rem;
-    z-index: 10;
+    margin-bottom: 0.5rem;
+    gap: 0.25rem;
+    align-items: center;
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  > .content {
+    position: absolute;
+    z-index: 40;
+    padding: 0.25rem;
+    border-radius: 0.75rem;
+    background-color: ${({ theme }) => theme.colors.gray2};
+    color: ${({ theme }) => theme.colors.gray10};
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+      0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    > .item {
+      padding: 0.25rem;
+      padding-left: 0.5rem;
+      padding-right: 0.5rem;
+      border-radius: 0.75rem;
+      font-size: 0.875rem;
+      line-height: 1.25rem;
+      white-space: nowrap;
+      cursor: pointer;
 
-    .item {
-      padding: 0.5rem 1rem;
-      
-      &:hover {
-        background-color: ${(props) => props.theme.colors.gray3};  // Changed from gray to gray3 for hover state
+      :hover {
+        background-color: ${({ theme }) => theme.colors.gray4};
       }
     }
   }
