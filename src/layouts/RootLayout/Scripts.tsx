@@ -13,7 +13,7 @@ const Scripts: React.FC = () => (
           {`window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-            gtag('config', '${CONFIG.googleAnalytics.config.measurementId}', {
+            gtag('config', 'GTM-5XX526WH', {
               page_path: window.location.pathname,
             });`}
         </Script>
