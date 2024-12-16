@@ -1,4 +1,4 @@
-// ProfileCard.tsx
+
 import { CONFIG } from "site.config"
 import { Emoji } from "src/components/Emoji"
 import Image from "next/image"
