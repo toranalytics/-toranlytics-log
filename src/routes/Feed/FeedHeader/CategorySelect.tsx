@@ -1,4 +1,4 @@
-// CategorySelect.tsx
+// src/routes/Feed/FeedHeader/CategorySelect.tsx
 import React, { useRef, useState } from "react"
 import styled from "@emotion/styled"
 import { useRouter } from "next/router"
@@ -65,7 +65,7 @@ const StyledWrapper = styled.div`
   .current {
     padding: 0.5rem 1rem;
     border-radius: 0.5rem;
-    background-color: ${(props) => props.theme.colors.gray};
+    background-color: ${(props) => props.theme.colors.gray1};  // Changed from gray to gray1
   }
 
   .content {
@@ -74,7 +74,7 @@ const StyledWrapper = styled.div`
     left: 0;
     width: 100%;
     margin-top: 0.5rem;
-    background-color: ${(props) => props.theme.colors.white};
+    background-color: ${(props) => props.theme.colors.gray1};  // Changed from gray to gray1
     border-radius: 0.5rem;
     box-shadow: ${(props) => props.theme.shadows.md};
     z-index: 10;
@@ -83,7 +83,7 @@ const StyledWrapper = styled.div`
       padding: 0.5rem 1rem;
       
       &:hover {
-        background-color: ${(props) => props.theme.colors.gray};
+        background-color: ${(props) => props.theme.colors.gray3};  // Changed from gray to gray3 for hover state
       }
     }
   }
