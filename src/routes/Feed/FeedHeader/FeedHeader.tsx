@@ -1,15 +1,12 @@
-// FeedHeader.tsx
 import React from "react"
 import { CategorySelect } from "./CategorySelect"
 import { OrderButtons } from "./OrderButtons"
 import { StyledWrapper } from "./styles"
 
-
 const FeedHeader: React.FC = () => {
-  // Add categories data
   const categoriesData: Record<string, number> = {
-    "category1": 10,
-    "category2": 20,
+    "All": 0,
+    // Add more categories as needed
   }
 
   return (
@@ -19,6 +16,5 @@ const FeedHeader: React.FC = () => {
     </StyledWrapper>
   )
 }
-
 
 export default FeedHeader
