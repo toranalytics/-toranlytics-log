@@ -7,6 +7,7 @@ import Scripts from "src/layouts/RootLayout/Scripts"
 import useGtagEffect from "./useGtagEffect"
 import useThrottle from "src/hooks/useThrottle"
 import { useRouter } from "next/router"
+import Category from "src/components/Category" // 카테고리 컴포넌트 임포트
 
 type Props = {
   children: ReactNode
@@ -60,22 +61,50 @@ const RootLayout = ({ children }: Props) => {
   return (
     <ThemeProvider scheme={scheme}>
       <Scripts />
-      {/* // TODO: replace react query */}
-      {/* {metaConfig.type !== "Paper" && <Header />} */}
       <Header
         fullWidth={false}
         readingProgress={blogHeight < 1200 ? 0 : getCurrentPercentage()}
       />
-      <StyledMain ref={currentElementRef}>{children}</StyledMain>
+      <LayoutContainer>
+        <CategoryWrapper>
+          <Category /> {/* 카테고리 컴포넌트 추가 */}
+        </CategoryWrapper>
+        <StyledMain ref={currentElementRef}>
+          {children}
+          <TagsWrapper>
+            {/* 태그 컴포넌트 또는 태그 내용을 추가 */}
+          </TagsWrapper>
+        </StyledMain>
+      </LayoutContainer>
     </ThemeProvider>
   )
 }
 
 export default RootLayout
 
+const LayoutContainer = styled.div`
+  display: flex;
+  justify-content: space-between; /* 좌우 정렬 */
+  align-items: flex-start; /* 상단 정렬 */
+  width: 100%;
+`
+
+const CategoryWrapper = styled.aside`
+  width: 200px; /* 카테고리 영역 너비 */
+  /* 추가 스타일 필요 시 여기에 작성 */
+`
+
 const StyledMain = styled.main`
   margin: 0 auto;
   width: 100%;
   max-width: 1120px;
   padding: 0 1rem;
+  position: relative; /* 태그 위치 조정 시 필요 */
+`
+
+const TagsWrapper = styled.div`
+  position: absolute; /* 절대 위치로 조정 */
+  bottom: 10px; /* 하단 여백 */
+  right: 10px; /* 우측 여백 */
+  /* 추가 스타일 필요 시 여기에 작성 */
 `
